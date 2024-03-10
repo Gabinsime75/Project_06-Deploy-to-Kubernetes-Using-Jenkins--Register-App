@@ -6,27 +6,29 @@ pipeline{
     }
 
     stages{
-        stage("Cleanup Workspace")
+        stage("Cleanup Workspace"){
             steps {
                 cleanWs()
+                }
         }
 
         stage("Checkout from SCM"){
-            steps{
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Gabinsime75/Project_06-Deploy-to-Kubernetes-Using-Jenkins--Register-App'
-            }
+            steps {
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Ashfaque-9x/register-app'
+                }
         }
 
         stage("Build Application"){
-            steps{
+            steps {
                 sh "mvn clean package"
             }
-        }
 
-        stage("Test Application"){
-            steps{
-                sh "mvn test"
-            }
-        }
-    }
+       }
+
+       stage("Test Application"){
+           steps {
+                 sh "mvn test"
+           }
+       }
+    }    
 }
